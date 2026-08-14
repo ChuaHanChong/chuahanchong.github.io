@@ -19,11 +19,11 @@ contact_note: The NTU address above is the best way to reach me.
 # straight into the schema.org JSON-LD without jsonify, so a `>` folded block - which
 # appends a trailing newline - produces a literal control character inside a JSON
 # string and makes the whole structured-data block unparseable.
-description: "PhD student at the College of Computing and Data Science, Nanyang Technological University, working on spatial intelligence, embodied AI, and real2sim2real."
+description: "PhD student at MMLab@NTU, Nanyang Technological University, working on embodied AI with spatial intelligence, real-to-sim-to-real transfer, and continual learning."
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-keywords: spatial intelligence, embodied AI, real2sim2real, sim2real, robot learning, computer vision, representation learning, NTU, PhD student # add your own keywords or leave empty
+keywords: embodied AI, spatial intelligence, real2sim2real, real-to-sim-to-real, sim2real, continual learning, robot learning, computer vision, representation learning, MMLab@NTU, S-Lab, NTU, PhD student, Chua Han Chong, 蔡汉宗 # add your own keywords or leave empty
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🦾 # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 apple_touch_icon: # image name in /assets/img/ (or a rooted path / absolute URL) used for iOS home-screen bookmarks; needs a real 180x180 PNG, since Safari ignores the emoji favicon above. Left empty, iOS falls back to a screenshot of the page.
