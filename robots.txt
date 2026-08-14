@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://chuahanchong.github.io/sitemap.xml
