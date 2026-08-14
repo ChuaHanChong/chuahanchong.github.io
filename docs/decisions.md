@@ -308,26 +308,7 @@ Chua-first.
 
 ---
 
-## 20. About page follows the template's division of labour
-
-**Chosen:** `subtitle` carries the affiliation, `profile.more_info` carries the postal
-address and nothing else, and the body prose carries everything else. Each fact appears
-exactly once across the page.
-
-**Why:** the first version put lab, advisor, school, and university in all three slots at
-once — "College of Computing and Data Science, Nanyang Technological University" appeared
-three times, "advised by Prof. Chen Change Loy" twice, and the NTU Research Scholarship in
-both the bio and the news list. al-folio's stock `more_info` is office and street address,
-and that is the right read: it is a caption under a photo, not a second bio.
-
-**Also:** the industry paragraph describes the *work* — vision-language adaptation under
-annotation constraints, semi/self-supervised learning, continual learning, serving
-infrastructure — without naming employers. Employer names stay on the CV, where they
-belong. An about page is read for what someone can do, not for their résumé.
-
----
-
-## 21. Build locally, decider pushes
+## 20. Build locally, decider pushes
 
 **Chosen:** the site is built in the working tree; creating the GitHub repository and pushing
 is left to the decider.
