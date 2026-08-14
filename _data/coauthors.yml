@@ -1,7 +1,11 @@
 # Co-author metadata for jekyll-scholar. Keys MUST be the lower-cased last name
 # with no accents; matching entries in _bibliography/papers.bib get linked automatically.
-# Left empty until there are real co-authors to link.
+#
+# Empty until there are real co-authors to link. Note the explicit `{}`: a
+# comments-only YAML file parses to nil, not an empty hash, which is a nil-deref
+# waiting to happen in citation rendering.
 #
 # "smith":
 #   - firstname: ["Jane", "J.", "J. A."]
 #     url: https://example.com/
+{}

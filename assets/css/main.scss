@@ -22,10 +22,14 @@
    Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
 @use "variables" with (
   $max-content-width: {{ site.max_width | default:  "930px" }},
-  // Accent colour. The gem maps $purple-color onto --global-theme-color and
-  // --global-hover-color in both light and dark themes, so this single value is
-  // the whole accent. Keep it in sync with `design.colors` in _data/cv.yml.
-  $purple-color: #0f766e
+  // Accent colour. The gem's _themes.scss maps $purple-color onto
+  // --global-theme-color / --global-hover-color in the LIGHT theme and
+  // $cyan-color onto the same two in the DARK theme, so both need setting or
+  // dark mode keeps al-folio's stock cyan. Neither variable is used anywhere
+  // else in the gem (verified by grep across al_folio_core/_sass).
+  // Keep the light value in sync with `design.colors` in _data/cv.yml.
+  $purple-color: #0f766e, // teal-700, light theme
+  $cyan-color: #2dd4bf // teal-400, dark theme - lighter, for contrast on dark
 );
 
 /* Your project partials — convert these files to `@use "variables";`
