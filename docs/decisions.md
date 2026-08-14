@@ -166,13 +166,17 @@ the first submission.
 
 ---
 
-## 11. Email: NTU primary, Gmail as the durable fallback
+## 11. Email: NTU address only
 
-**Chosen:** `CHUA1163@e.ntu.edu.sg` on the social icon; `hanz.chuahanchong@gmail.com` named
-in `contact_note`.
+**Chosen:** `CHUA1163@e.ntu.edu.sg` on the social icon. No personal address anywhere.
 
 **Why:** an institutional address signals a real researcher at a real lab and fares better
-in academic spam filters. It also dies at graduation, and this page will outlive it.
+in academic spam filters.
+
+**Superseded 2026-08-14:** originally the personal Gmail was listed alongside it as the
+durable fallback for after graduation. Removed at the decider's request. The graduation
+problem is now unsolved - the fix is a custom domain with a forwarding alias (decision 2,
+deferred), which is the better answer anyway.
 
 ---
 

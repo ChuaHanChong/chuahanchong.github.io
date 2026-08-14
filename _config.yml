@@ -14,9 +14,7 @@ title: Chua Han Chong # the website title (if blank, full name will be used inst
 first_name: Chua
 middle_name: Han
 last_name: Chong
-contact_note: >
-  The NTU address above is the best way to reach me. hanz.chuahanchong@gmail.com
-  is the one that will still work after I graduate.
+contact_note: The NTU address above is the best way to reach me.
 # MUST stay a single-line scalar. al_folio_core's metadata.liquid interpolates this
 # straight into the schema.org JSON-LD without jsonify, so a `>` folded block - which
 # appends a trailing newline - produces a literal control character inside a JSON

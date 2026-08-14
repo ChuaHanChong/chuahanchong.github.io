@@ -53,7 +53,6 @@ Two traps worth knowing, both verified against RenderCV v2.8:
 
 ## Open TODOs
 
-- Supervisor and lab — `_pages/about.md` (`more_info`)
 - ORCID iD, Google Scholar ID, X, Hugging Face — `_data/socials.yml`
 - MSc completion month — `_data/cv.yml`, currently `2026-01`, confirm against transcript
 - Certificate dates — `_data/cv.yml`, omitted rather than guessed

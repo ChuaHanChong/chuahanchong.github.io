@@ -9,13 +9,11 @@ profile:
   image: prof_pic.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
+    <p>Advised by <a href="https://www.mmlab-ntu.com/person/ccloy/">Prof. Chen Change Loy</a></p>
+    <p><a href="https://www.mmlab-ntu.com/index.html">MMLab@NTU</a></p>
     <p>College of Computing and Data Science</p>
     <p>Nanyang Technological University</p>
     <p>50 Nanyang Avenue, Singapore 639798</p>
-    <!-- TODO: add supervisor and lab once assigned, e.g.
-    <p>Advised by <a href="">Prof. Name</a></p>
-    <p><a href="">Lab Name</a></p>
-    -->
 
 selected_papers: false # flip to true once _bibliography/papers.bib has entries marked selected={true}
 social: true # includes social icons at the bottom of the page
@@ -31,7 +29,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am a PhD student at the College of Computing and Data Science, Nanyang Technological University, supported by the NTU Research Scholarship.
+I am a PhD student at [MMLab@NTU](https://www.mmlab-ntu.com/index.html), College of Computing and Data Science, Nanyang Technological University, advised by [Prof. Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/) and supported by the NTU Research Scholarship.
 
 My research is on **spatial intelligence**, **embodied AI**, and **real2sim2real**: how an agent builds a spatial representation of the physical world that is good enough to act on, and how to close the gap between what works in simulation and what survives contact with real sensors and real hardware.
 
