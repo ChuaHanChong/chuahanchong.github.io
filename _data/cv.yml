@@ -224,6 +224,14 @@ cv:
         awarder: Nanyang Technological University, Graduate College
         url: https://www.ntu.edu.sg/admissions/graduate/financialmatters/scholarships/rss
 
+    Languages:
+      - name: Chinese
+        icon: fa-solid fa-language
+        summary: Native speaker
+      - name: English
+        icon: fa-solid fa-language
+        summary: Professional working proficiency
+
     Interests:
       - name: Research
         icon: fa-solid fa-lightbulb
