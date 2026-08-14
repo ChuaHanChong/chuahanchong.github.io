@@ -50,3 +50,25 @@
 @use "tabs";
 @use "teachings";
 @use "typograms";
+
+// -----------------------------------------------------------------------------
+// About page: contact icons sit under the name, not at the foot of the article
+// (the block is moved in the local _layouts/about.liquid override). The gem
+// centres .social, which reads as stray floating icons once it is up here, so
+// left-align it to make it part of the header.
+// -----------------------------------------------------------------------------
+.post > article > .social {
+  text-align: left;
+  margin-top: 0.25rem;
+  margin-bottom: 1.75rem;
+
+  .contact-icons {
+    font-size: 1.6rem;
+    text-align: left;
+  }
+
+  .contact-note {
+    text-align: left;
+    margin-top: 0.4rem;
+  }
+}

@@ -17,8 +17,7 @@ linkedin_username: chuahanchong
 # once your first paper is indexed). The value is the `user=` parameter of the profile URL.
 # scholar_userid:
 
-# TODO: uncomment if you start posting on X.
-# x_username:
+x_username: ChuaHanChong
 
 # TODO: uncomment once you publish a model or dataset on Hugging Face.
 # jekyll-socials has no built-in huggingface key, so it goes through custom_social.
