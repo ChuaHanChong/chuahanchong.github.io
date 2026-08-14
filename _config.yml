@@ -2,7 +2,7 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Chua Han Chong # the website title (if blank, full name will be used instead)
+title: Chua Han Chong (蔡汉宗) # the website title (if blank, full name will be used instead)
 # al-folio joins these as "first middle last" for the footer, the Open Graph and
 # schema.org author name, and the blog "cite this" block. Split Chua / Han / Chong
 # so every one of those reads "Chua Han Chong", matching the page heading, the CV,
