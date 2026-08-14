@@ -51,19 +51,28 @@ upstream link and makes it easy to open a pull request against al-folio by accid
 
 ---
 
-## 4. Local preview: Docker Desktop
+## 4. Local preview: Homebrew Ruby (Docker was chosen but never installed)
 
-**Chosen:** Docker Desktop, `docker compose up`, <http://localhost:8080>.
+**Chosen originally:** Docker Desktop, `docker compose up`, <http://localhost:8080>, because
+al-folio marks the native-Ruby setup "Legacy, no longer supported" and the machine's
+system Ruby is 2.6.10 (2019), far below what the Gemfile needs.
 
-**Why:** al-folio marks the native-Ruby setup "Legacy, no longer supported"; Docker is
-the supported path. The machine's system Ruby is 2.6.10 (2019), far below what the
-current Gemfile needs.
+**What actually happened:** `brew install --cask docker` failed. The cask symlinks helper
+binaries into `/usr/local/bin`, which needs root, and a non-interactive shell gives `sudo`
+no terminal to prompt on. Homebrew rolled the install back and purged it, so Docker is
+**not installed**.
 
-**Rejected:** OrbStack and colima (both lighter, but the user chose the official
-runtime), no local preview (~1–2 min per feedback cycle and a public commit per typo).
+**Actual setup:** `brew install ruby imagemagick` (no sudo required), then `bundle install`
+into `vendor/bundle` and `bundle exec jekyll build`. This has driven every build and every
+verification since. Ruby 4.0.6 locally vs 3.3.5 in CI, so a green local build is strong
+evidence rather than proof.
 
-**Consequence:** Docker is a *preview* dependency only. The live site is built by
-GitHub Actions; the laptop can be off.
+**Rejected:** OrbStack and colima (both lighter, but Docker Desktop was the stated
+preference), no local preview at all (~1–2 min per feedback cycle and a public commit per typo).
+
+**Consequence:** preview is a local convenience only. The live site is built by GitHub
+Actions; the laptop can be off. Docker remains installable at any time with
+`brew install --cask docker` run from an interactive terminal.
 
 ---
 

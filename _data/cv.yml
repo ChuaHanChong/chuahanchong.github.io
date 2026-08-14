@@ -70,50 +70,16 @@ cv:
       username: ChuaHanChong
 
   sections:
-    Education:
-      - institution: Nanyang Technological University
-        location: Singapore
-        # `area` is required by RenderCV but left empty: the field is folded into
-        # `degree` so the website renders two lines (degree, institution) instead of
-        # three. al-folio skips an empty area.
-        area: ""
-        degree: Doctor of Philosophy in Computing and Data Science
-        start_date: 2026-08
-        highlights:
-          - MMLab@NTU, affiliated with S-Lab. Advised by Professor Chen Change Loy.
-          - Supported by the NTU Research Scholarship.
-
-      - institution: Nanyang Technological University
-        location: Singapore
-        # `area` is required by RenderCV but left empty: the field is folded into
-        # `degree` so the website renders two lines (degree, institution) instead of
-        # three. al-folio skips an empty area.
-        area: ""
-        degree: Master of Science in Artificial Intelligence
-        start_date: 2023-08
-        end_date: 2026-06
-        highlights:
-          - "CGPA: 4.30/5.00."
-          # AI6123 Time Series Analysis omitted: the transcript grades it W (withdrawn).
-          # Kept in `highlights` rather than the template's `courses` field, which
-          # al-folio renders but RenderCV ignores - it would vanish from the PDF.
-          - "Coursework: AI6101 Introduction to AI & AI Ethics; AI6102 Machine Learning
-            Methodologies & Applications; AI6103 Deep Learning & Applications; AI6104
-            Mathematics for Artificial Intelligence; AI6128 Urban Computing; AI6129 AI
-            Master Project; AI6130 Large Language Models; AI6131 3D Deep Learning;
-            AI6132 Generative AI for Visual Synthesis."
-
-      - institution: Universiti Putra Malaysia
-        location: Kuala Lumpur, Malaysia
-        # `area` is required by RenderCV but left empty: the field is folded into
-        # `degree` so the website renders two lines (degree, institution) instead of
-        # three. al-folio skips an empty area.
-        area: ""
-        degree: Bachelor of Engineering in Mechanical Engineering
-        start_date: 2013-09
-        end_date: 2017-07
-        highlights:
-          - "CGPA: 3.728/4.00."
+    # Not `cv.summary`: al-folio's template renders that as "Professional Summary",
+    # but RenderCV 2.x rejects the key outright and the render-cv workflow fails.
+    # A `bullet` entry renders in both - al-folio's generic section renderer handles
+    # `bullet`, and RenderCV treats it as a BulletEntry.
+    Professional Summary:
+      - bullet: PhD student at MMLab@NTU working on embodied AI with spatial
+          intelligence, through real-to-sim-to-real transfer and continual learning.
+          Nine years of prior experience in data science, artificial intelligence, and
+          MLOps, turning research methods into production systems at scale and leading
+          cross-functional teams to deliver them.
 
     Experience:
       - company: Porolis Technologies Pte. Ltd.
@@ -211,41 +177,50 @@ cv:
           - Built an uplift model for promotion response likelihood, cutting message cost
             by 10%.
 
-    Projects:
-      - name: Learning Self-Supervised Visual Representations for Fine-grained Maritime Vessel Recognition
-        summary: MSc dissertation, Nanyang Technological University.
+    Education:
+      - institution: Nanyang Technological University
+        location: Singapore
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Doctor of Philosophy in Computing and Data Science
+        start_date: 2026-08
         highlights:
-          - Curated over 3.1M vessel images across 21 fine-grained categories via a
-            data-sourcing pipeline, deduplicated with a Self-Supervised Copy Detection model.
-          - Built supervised Vision Transformer baselines (ViT-B/L/H) and compared
-            self-supervised paradigms including MAE, DINOv2, and I-JEPA.
-          - Addressed class imbalance with balanced sampling and logit-adjusted loss.
-          - Reached 98.82% test accuracy over 17 in-distribution vessel classes and 100% over
-            4 out-of-distribution classes, showing self-supervised pre-training generalises
-            better than supervised-only baselines.
+          - MMLab@NTU, affiliated with S-Lab. Advised by Professor Chen Change Loy.
+          - Supported by the NTU Research Scholarship.
 
-      - name: Application of the Bees Algorithm to Improve the Performance of Flywheel Energy Storage
-        summary: BEng final year project, Universiti Putra Malaysia.
+      - institution: Nanyang Technological University
+        location: Singapore
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Master of Science in Artificial Intelligence
+        start_date: 2023-08
+        end_date: 2026-06
         highlights:
-          - Optimised composite flywheel rotor geometry with the Bees Algorithm under the
-            Tsai-Hill failure criterion to maximise energy storage while minimising mass.
-          - Validated top designs with finite element analysis in ANSYS, improving usable
-            energy by 23.5% and reducing rotor mass by 41.5% against the NASA G3 baseline.
+          - "CGPA: 4.30/5.00."
+          # AI6123 Time Series Analysis omitted: the transcript grades it W (withdrawn).
+          # Kept in `highlights` rather than the template's `courses` field, which
+          # al-folio renders but RenderCV ignores - it would vanish from the PDF.
+          - "Coursework: AI6101 Introduction to AI & AI Ethics; AI6102 Machine Learning
+            Methodologies & Applications; AI6103 Deep Learning & Applications; AI6104
+            Mathematics for Artificial Intelligence; AI6128 Urban Computing; AI6129 AI
+            Master Project; AI6130 Large Language Models; AI6131 3D Deep Learning;
+            AI6132 Generative AI for Visual Synthesis."
 
-    Languages:
-      - name: Chinese
-        icon: fa-solid fa-language
-        summary: Native speaker
-      - name: English
-        icon: fa-solid fa-language
-        summary: Professional working proficiency
-
-    Interests:
-      - name: Research
-        icon: fa-solid fa-lightbulb
-        keywords: "Embodied AI with spatial intelligence, real-to-sim-to-real transfer,
-          continual learning"
-        summary: "Embodied AI with spatial intelligence, real-to-sim-to-real transfer, continual learning"
+      - institution: Universiti Putra Malaysia
+        location: Kuala Lumpur, Malaysia
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Bachelor of Engineering in Mechanical Engineering
+        start_date: 2013-09
+        end_date: 2017-07
+        highlights:
+          - "CGPA: 3.728/4.00."
 
     Skills:
       - name: Machine Learning and Research
@@ -280,26 +255,53 @@ cv:
           (SageMaker, EC2, S3), GCP (Vertex AI, Compute Engine), Optuna, Ax, Git"
         summary: "MLflow, Feast, TensorFlow Extended, FastAPI, Redis, Docker, AWS (SageMaker, EC2, S3), GCP (Vertex AI, Compute Engine), Optuna, Ax, Git"
 
-    # Dates verified against the Coursera credential pages linked from CV_ChuaHanChong.pdf.
-    # Three have no date: Practical Data Science reports the Unix epoch on Coursera's own
-    # page, and Machine Learning / Mathematics for ML have no certificate in that folder.
+    Languages:
+      - name: Chinese
+        icon: fa-solid fa-language
+        summary: Native speaker
+      - name: English
+        icon: fa-solid fa-language
+        summary: Professional working proficiency
+
+    Interests:
+      - name: Research
+        icon: fa-solid fa-lightbulb
+        keywords: "Embodied AI with spatial intelligence, real-to-sim-to-real transfer,
+          continual learning"
+        summary: "Embodied AI with spatial intelligence, real-to-sim-to-real transfer, continual learning"
+
+    # Dates verified against the Coursera credential pages linked from CV_ChuaHanChong.pdf,
+    # except: Practical Data Science (read off the certificate PDF, since Coursera's page
+    # reports the Unix epoch) and Machine Learning / Mathematics for ML (years supplied by
+    # the CV owner - no certificate for either in that Drive folder).
     Certificates:
-      - name: Deep Learning Specialization
-        date: 2018-06-11
-        issuer: DeepLearning.AI
-        summary: DeepLearning.AI
-        icon: fa-solid fa-certificate
-      - name: Machine Learning Specialization
-        issuer: DeepLearning.AI
-        summary: DeepLearning.AI
+      - name: AWS Fundamentals Specialization
+        date: 2023-07-22
+        issuer: Amazon Web Services
+        summary: Amazon Web Services
         icon: fa-solid fa-certificate
       - name: Machine Learning Engineering for Production (MLOps) Specialization
         date: 2023-07-07
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
+      - name: Practical Data Science on the AWS Cloud Specialization
+        date: 2023-07-06
+        issuer: DeepLearning.AI and Amazon Web Services
+        summary: DeepLearning.AI and Amazon Web Services
+        icon: fa-solid fa-certificate
+      - name: Generative AI with Large Language Models
+        date: 2023-07-05
+        issuer: DeepLearning.AI and Amazon Web Services
+        summary: DeepLearning.AI and Amazon Web Services
+        icon: fa-solid fa-certificate
       - name: Natural Language Processing Specialization
         date: 2023-06-10
+        issuer: DeepLearning.AI
+        summary: DeepLearning.AI
+        icon: fa-solid fa-certificate
+      - name: Mathematics for Machine Learning and Data Science Specialization
+        date: 2023
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
@@ -308,21 +310,34 @@ cv:
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
-      - name: Mathematics for Machine Learning and Data Science Specialization
+      - name: Deep Learning Specialization
+        date: 2018-06-11
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
-      - name: Generative AI with LLMs
-        date: 2023-07-05
-        issuer: DeepLearning.AI and Amazon Web Services
-        summary: DeepLearning.AI and Amazon Web Services
+      - name: Machine Learning Specialization
+        date: 2018
+        issuer: DeepLearning.AI
+        summary: DeepLearning.AI
         icon: fa-solid fa-certificate
-      - name: Practical Data Science on the AWS Cloud Specialization
-        issuer: DeepLearning.AI and Amazon Web Services
-        summary: DeepLearning.AI and Amazon Web Services
-        icon: fa-solid fa-certificate
-      - name: AWS Fundamentals Specialization
-        date: 2023-07-22
-        issuer: Amazon Web Services
-        summary: Amazon Web Services
-        icon: fa-solid fa-certificate
+
+    Projects:
+      - name: Learning Self-Supervised Visual Representations for Fine-grained Maritime Vessel Recognition
+        summary: MSc dissertation, Nanyang Technological University.
+        highlights:
+          - Curated over 3.1M vessel images across 21 fine-grained categories via a
+            data-sourcing pipeline, deduplicated with a Self-Supervised Copy Detection model.
+          - Built supervised Vision Transformer baselines (ViT-B/L/H) and compared
+            self-supervised paradigms including MAE, DINOv2, and I-JEPA.
+          - Addressed class imbalance with balanced sampling and logit-adjusted loss.
+          - Reached 98.82% test accuracy over 17 in-distribution vessel classes and 100% over
+            4 out-of-distribution classes, showing self-supervised pre-training generalises
+            better than supervised-only baselines.
+
+      - name: Application of the Bees Algorithm to Improve the Performance of Flywheel Energy Storage
+        summary: BEng final year project, Universiti Putra Malaysia.
+        highlights:
+          - Optimised composite flywheel rotor geometry with the Bees Algorithm under the
+            Tsai-Hill failure criterion to maximise energy storage while minimising mass.
+          - Validated top designs with finite element analysis in ANSYS, improving usable
+            energy by 23.5% and reducing rotor mass by 41.5% against the NASA G3 baseline.

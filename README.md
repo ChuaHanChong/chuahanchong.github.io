@@ -20,16 +20,37 @@ Design decisions and the reasoning behind them: [`docs/decisions.md`](docs/decis
 
 ## Local preview
 
-Requires Docker Desktop to be running.
+Either path works. Preview is **only** for your machine — the live site is built by GitHub Actions, so nothing here needs to be installed or running for the site to be up.
+
+### Native (what this repo is set up for)
+
+Gems are already installed under `vendor/bundle`. macOS system Ruby is far too old, so use the Homebrew one:
+
+```bash
+brew install ruby imagemagick          # once
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+bundle install                         # once
+bundle exec jekyll serve
+```
+
+Then open <http://localhost:4000>.
+
+### Docker (upstream's recommended path)
+
+al-folio marks the native setup "legacy, no longer supported" and documents Docker instead:
 
 ```bash
 docker compose pull
 docker compose up
 ```
 
-Then open <http://localhost:8080>. Changes rebuild automatically.
+Then open <http://localhost:8080>.
 
-Docker is **only** for local preview. The live site is built on GitHub's runners — your machine does not need to be on for the site to be up.
+Docker Desktop is **not currently installed here**. Installing it needs a terminal that can prompt for `sudo` (the cask symlinks helpers into `/usr/local/bin`), so run it yourself:
+
+```bash
+brew install --cask docker
+```
 
 ## The CV is one source, two outputs
 

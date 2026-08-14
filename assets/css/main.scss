@@ -72,3 +72,13 @@
     margin-top: 0.4rem;
   }
 }
+
+// -----------------------------------------------------------------------------
+// CV page: line up the date badges.
+// al_folio_cv puts dates in a `col-md-2 text-center date-column`, so pills of
+// different widths ("2013 - 2017" vs "2026 - PRESENT") get different left edges
+// and the column reads as ragged. Left-align it instead.
+// -----------------------------------------------------------------------------
+.cv .date-column {
+  text-align: left;
+}
