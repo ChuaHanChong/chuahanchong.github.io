@@ -44,6 +44,13 @@ Two traps worth knowing, both verified against RenderCV v2.8:
 
 `publications`, `projects`, `blog`, `news`, `repositories`, and `teaching` are all written and wired, but carry `published: false`. That means Jekyll does not build them at all — no URL, no sitemap entry, nothing indexable. Each file's front matter says what to add before flipping it to `true`.
 
+## Known quirks (verified, deliberately not patched)
+
+- `/cv/` renders **Experience before Education**; the PDF renders Education first. The order is hard-coded in the `al_folio_cv` gem and cannot be configured. Renaming the section drops the entries entirely.
+- `_config.yml`'s `description:` **must stay a single-line scalar**. A `>` folded block adds a trailing newline that lands inside the schema.org JSON-LD and makes it unparseable.
+- The `sameAs` array in the JSON-LD starts with a `null`, contributed by the gem. Harmless; consumers ignore it.
+- `_config.yml` splits the name as Chua / Han / Chong so the footer and metadata match the heading. The surname is really Chua, so the blog's "cite this" block would read "Chong, Chua Han" — only relevant once the blog is published.
+
 ## Open TODOs
 
 - Supervisor and lab — `_pages/about.md` (`more_info`)

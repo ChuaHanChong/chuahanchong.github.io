@@ -250,7 +250,61 @@ and that is the one piece of upstream CI that saves work here.
 
 ---
 
-## 17. Build locally, decider pushes
+## 17. Known gem limitations, accepted rather than patched
+
+Three al-folio behaviours were found during verification and deliberately left alone.
+Each would cost a template override to fix, and overrides are upgrade liabilities
+(decision 13 already carries one that was unavoidable).
+
+**CV section order on the page cannot be controlled.** `al_folio_cv`'s `render.liquid`
+renders Experience first, hard-coded, then loops the remaining sections in file order.
+So `/cv/` shows Experience before Education while the PDF — which respects `cv.yml`
+order — shows Education first. Renaming the section is *not* a workaround: unknown
+section names fall through to a generic renderer that only handles `bullet` and `label`
+entries, so all nine years of work history would silently vanish from the page.
+
+**`sameAs` in the JSON-LD begins with `null`.** The seed array in `al_folio_core`'s
+`metadata.liquid` contributes an empty element. The JSON still parses and consumers
+ignore the null; fixing it means overriding a 250-line template.
+
+**The news collection needed `output: false`.** With al-folio's default `output: true`,
+each one-line announcement got its own URL and sitemap entry — two thin pages on a
+four-page site. They render inline on the about page regardless.
+
+---
+
+## 18. `site.description` must stay a single-line scalar
+
+**Chosen:** `description:` in `_config.yml` is a quoted single-line string, not a `>`
+folded block.
+
+**Why:** `al_folio_core`'s `metadata.liquid` interpolates it directly into the
+schema.org JSON-LD without `jsonify`. A folded block appends a trailing newline, which
+becomes a literal control character inside a JSON string and makes the entire
+structured-data block unparseable. Caught by parsing the built `_site/index.html`;
+al-folio ships the folded form by default, so this is an upstream trap, and it defeats
+the whole point of a findability page.
+
+---
+
+## 19. Name renders as "Chua Han Chong" everywhere
+
+**Chosen:** `first_name: Chua`, `middle_name: Han`, `last_name: Chong`.
+
+**Why:** al-folio joins the three as "first middle last" for the footer, the Open Graph
+and schema.org author name, and the blog citation block. The semantically correct split
+(given name "Han Chong", surname "Chua") made those read "Han Chong Chua" while the page
+heading read "Chua Han Chong" — two different names on one page, which is bad for both
+readers and search. Every handle the decider controls (CV header, GitHub, LinkedIn) uses
+Chua-first.
+
+**Known cost:** the surname really is Chua, so `citation.liquid` will emit
+"Chong, Chua Han" on blog posts. The blog is unpublished. If publishing under
+"Han Chong Chua", swap the keys back — noted inline in `_config.yml`.
+
+---
+
+## 20. Build locally, decider pushes
 
 **Chosen:** the site is built in the working tree; creating the GitHub repository and pushing
 is left to the decider.

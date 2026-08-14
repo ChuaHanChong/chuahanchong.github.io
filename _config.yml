@@ -3,15 +3,25 @@
 # -----------------------------------------------------------------------------
 
 title: Chua Han Chong # the website title (if blank, full name will be used instead)
-first_name: Han Chong
-middle_name:
-last_name: Chua
+# al-folio joins these as "first middle last" for the footer, the Open Graph and
+# schema.org author name, and the blog "cite this" block. Split Chua / Han / Chong
+# so every one of those reads "Chua Han Chong", matching the page heading, the CV,
+# and the GitHub and LinkedIn handles - rather than the theme's Western reordering
+# into "Han Chong Chua".
+# CAVEAT: the surname is Chua, so al_folio_core's citation.liquid will emit
+# "Chong, Chua Han" on blog posts. Only affects the blog, which is unpublished.
+# If you publish under "Han Chong Chua" instead, swap these back.
+first_name: Chua
+middle_name: Han
+last_name: Chong
 contact_note: >
   The NTU address above is the best way to reach me. hanz.chuahanchong@gmail.com
   is the one that will still work after I graduate.
-description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  PhD student at the College of Computing and Data Science, Nanyang Technological University,
-  working on spatial intelligence, embodied AI, and real2sim2real.
+# MUST stay a single-line scalar. al_folio_core's metadata.liquid interpolates this
+# straight into the schema.org JSON-LD without jsonify, so a `>` folded block - which
+# appends a trailing newline - produces a literal control character inside a JSON
+# string and makes the whole structured-data block unparseable.
+description: "PhD student at the College of Computing and Data Science, Nanyang Technological University, working on spatial intelligence, embodied AI, and real2sim2real."
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
@@ -193,7 +203,11 @@ collections:
   news:
     defaults:
       layout: post
-    output: true
+    # output: false so one-line announcements do not each get their own thin URL
+    # and sitemap entry. They render inline on the about page either way (that
+    # reads site.news directly). Set to true if you ever write a long-form news
+    # item that needs its own page - such items must also drop `inline: true`.
+    output: false
   projects:
     output: true
 
@@ -235,6 +249,7 @@ exclude:
   - purgecss.config.js
   - README.md
   - readme_preview/
+  - requirements.txt
   - gems/
   - migrations/
   - vendor
