@@ -26,6 +26,6 @@ latest_posts:
 
 I am a PhD student at [MMLab@NTU](https://www.mmlab-ntu.com/) (affiliated with [S-Lab](https://www.ntu.edu.sg/s-lab)), [College of Computing and Data Science](https://www.ntu.edu.sg/computing) (CCDS), [Nanyang Technological University](https://www.ntu.edu.sg) (NTU). I am advised by [Professor Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/) and supported by the [NTU Research Scholarship](https://www.ntu.edu.sg/admissions/graduate/financialmatters/scholarships/rss#Content_C006_Col00). I hold a Master of Science in Artificial Intelligence from CCDS, NTU; and a Bachelor of Engineering in Mechanical Engineering from the [Faculty of Engineering](https://eng.upm.edu.my/), [Universiti Putra Malaysia](https://upm.edu.my/).
 
-My research is on **embodied AI with spatial intelligence**: perceiving, representing, and reasoning about 3D space well enough to act in it. I work on **real-to-sim-to-real** transfer, and on **continual learning** so that a deployed embodied agent keeps improving.
+My current research is on **embodied AI with spatial intelligence**: perceiving, representing, and reasoning about 3D space well enough to act in it. I build this through **real-to-sim-to-real** transfer and keep it adapting to new environments through **continual learning**.
 
 Before my PhD, I spent nine years in industry building and deploying production AI systems, spanning computer vision modelling, foundation model adaptation, and ML operations.
