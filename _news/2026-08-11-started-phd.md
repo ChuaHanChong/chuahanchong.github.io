@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Started my PhD at the College of Computing and Data Science, NTU.
+Started my PhD at MMLab@NTU.
