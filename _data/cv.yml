@@ -264,10 +264,12 @@ cv:
           (SageMaker, EC2, S3), GCP (Vertex AI, Compute Engine), Optuna, Ax, Git"
         summary: "MLflow, Feast, TensorFlow Extended, FastAPI, Redis, Docker, AWS (SageMaker, EC2, S3), GCP (Vertex AI, Compute Engine), Optuna, Ax, Git"
 
-    # TODO: add `date:` to each entry once you dig the completion dates out of Coursera.
-    # Left off deliberately rather than guessed.
+    # Dates verified against the Coursera credential pages linked from CV_ChuaHanChong.pdf.
+    # Three have no date: Practical Data Science reports the Unix epoch on Coursera's own
+    # page, and Machine Learning / Mathematics for ML have no certificate in that folder.
     Certificates:
       - name: Deep Learning Specialization
+        date: 2018-06-11
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
@@ -276,14 +278,17 @@ cv:
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
       - name: Machine Learning Engineering for Production (MLOps) Specialization
+        date: 2023-07-07
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
       - name: Natural Language Processing Specialization
+        date: 2023-06-10
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
       - name: AI for Medicine Specialization
+        date: 2020-06-05
         issuer: DeepLearning.AI
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
@@ -292,6 +297,7 @@ cv:
         summary: DeepLearning.AI
         icon: fa-solid fa-certificate
       - name: Generative AI with LLMs
+        date: 2023-07-05
         issuer: DeepLearning.AI and Amazon Web Services
         summary: DeepLearning.AI and Amazon Web Services
         icon: fa-solid fa-certificate
@@ -300,6 +306,7 @@ cv:
         summary: DeepLearning.AI and Amazon Web Services
         icon: fa-solid fa-certificate
       - name: AWS Fundamentals Specialization
+        date: 2023-07-22
         issuer: Amazon Web Services
         summary: Amazon Web Services
         icon: fa-solid fa-certificate
