@@ -1,326 +1,223 @@
 # Decision record
 
-Decisions taken while building this site, and why. Written so that a future change
-argues with the reasoning rather than rediscovering it.
+Why this site is the way it is. Read before changing something that looks odd.
 
-Date: 2026-08-14. Decider: Chua Han Chong.
+Decider: Chua Han Chong. Started 2026-08-14, last revised 2026-08-15.
+Numbering is stable - `glossary.md` cites decisions by number.
 
 ---
 
 ## 1. Purpose: findability page, not a research showcase
 
-**Chosen:** a canonical "this is me" page — bio, research interests, links, CV.
-
-**Why:** the PhD started 2026-08-11. There are no papers. A findability page is honest
-at year 0 and converts into a publications page for free as output lands. A research
-showcase today would be mostly empty sections.
-
-**Rejected:** blog (needs sustained writing habit; most academic blogs stall at two
-posts), job-hunt landing page (premature).
+A canonical "this is me" page: bio, research interests, links, CV. The PhD started
+2026-08-11 and there are no papers yet; this converts into a publications page for free
+as output lands.
 
 ---
 
 ## 2. Hosting: GitHub Pages user site
 
-**Chosen:** `chuahanchong.github.io`.
-
-**Why:** free, no infrastructure, the GitHub account already exists. A custom domain is
-one `CNAME` file away, so deferring it costs nothing and locks in nothing.
-
-**Rejected:** NTU-provided web space (dies at graduation), Vercel/Netlify (another
-vendor for a static site), custom domain now (real annual cost, zero benefit today).
+`chuahanchong.github.io`. Free, no infrastructure. A custom domain is one `CNAME` file
+away, so deferring it locks in nothing.
 
 ---
 
 ## 3. Stack: al-folio v1.2
 
-**Chosen:** al-folio, Jekyll, applied via "Use this template" semantics (clone → strip
-`.git` → fresh `git init`).
+Applied via "Use this template" semantics (clone, strip `.git`, fresh `git init`) rather
+than a fork, so there is no upstream link to open a pull request against by accident.
 
-**Why:** it is the field default in ML — 16k stars, 13.1k forks, v1.2 released
-2026-08-09. The user asked for modular and maintainable: al-folio means editing YAML
-and Markdown, never layout code. v1.x is a thin starter over versioned plugin gems, so
-upgrades are less painful than the old fork-and-diverge model.
-
-**Rejected:** plain HTML/CSS (no modularity — explicitly not wanted), academicpages
-(lighter but fewer features), Astro (no toolchain cost given Node is installed, but the
-academic template ecosystem is immature and the layout becomes yours to maintain).
-
-**Note on fork vs template:** upstream recommends the template button. A fork keeps an
-upstream link and makes it easy to open a pull request against al-folio by accident.
+v1.x is a thin starter over versioned plugin gems, so most files here are YAML and
+Markdown, and upgrades are a gem bump rather than a merge.
 
 ---
 
-## 4. Local preview: Homebrew Ruby (Docker was chosen but never installed)
+## 4. Local preview: Homebrew Ruby
 
-**Chosen originally:** Docker Desktop, `docker compose up`, <http://localhost:8080>, because
-al-folio marks the native-Ruby setup "Legacy, no longer supported" and the machine's
-system Ruby is 2.6.10 (2019), far below what the Gemfile needs.
+```bash
+brew install ruby imagemagick
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+bundle install && bundle exec jekyll build
+```
 
-**What actually happened:** `brew install --cask docker` failed. The cask symlinks helper
-binaries into `/usr/local/bin`, which needs root, and a non-interactive shell gives `sudo`
-no terminal to prompt on. Homebrew rolled the install back and purged it, so Docker is
-**not installed**.
+Docker was the original choice - upstream marks native Ruby "legacy, no longer
+supported" - but `brew install --cask docker` needs an interactive `sudo` prompt and
+failed, so **Docker is not installed**. Installable any time from a real terminal.
 
-**Actual setup:** `brew install ruby imagemagick` (no sudo required), then `bundle install`
-into `vendor/bundle` and `bundle exec jekyll build`. This has driven every build and every
-verification since. Ruby 4.0.6 locally vs 3.3.5 in CI, so a green local build is strong
-evidence rather than proof.
-
-**Rejected:** OrbStack and colima (both lighter, but Docker Desktop was the stated
-preference), no local preview at all (~1–2 min per feedback cycle and a public commit per typo).
-
-**Consequence:** preview is a local convenience only. The live site is built by GitHub
-Actions; the laptop can be off. Docker remains installable at any time with
-`brew install --cask docker` run from an interactive terminal.
+Ruby is 4.0.6 locally against 3.3.5 in CI, so a green local build is strong evidence,
+not proof. Preview is a local convenience only; the live site is built by GitHub Actions.
 
 ---
 
 ## 5. Sections: all built, only About and CV published
 
-**Chosen:** every page written and wired; `publications`, `projects`, `blog`, `news`,
-`repositories`, `teaching` carry `published: false`.
+`publications`, `projects`, `blog`, `news`, `repositories`, `teaching` carry
+`published: false`. Turning one on later is a one-word change.
 
-**Why:** a visitor clicking "Publications" and finding a placeholder learns the same
-fact more slowly and less kindly than one who sees no such tab. Building the pages now
-means turning one on later is a one-word change, not new work.
-
-**Rejected:** "work in progress" placeholders and progress bars (originally requested;
-a progress bar visualises a number you do not control and reads oddly to academic
-readers), deleting the pages outright (throws away the wiring).
-
-**Key detail:** `published: false`, not `nav: false`. `nav: false` only hides the navbar
-link — the page still builds, still has a URL, and still lands in `sitemap.xml` via
-jekyll-sitemap, so Google can index an empty page. `published: false` means Jekyll skips
-the file entirely.
+**Use `published: false`, not `nav: false`.** `nav: false` only hides the navbar link -
+the page still builds, still has a URL, and still lands in `sitemap.xml`, so Google can
+index an empty page.
 
 ---
 
-## 6. CV: RenderCV, one source for page and PDF
+## 6. CV: one source, two outputs
 
-**Chosen:** `_data/cv.yml` in RenderCV format; `.github/workflows/render-cv.yml`
-generates the PDF; `cv_pdf` points at the generated file.
-
-**Why:** recruiters want a PDF, Google wants indexable text, and maintaining both by
-hand guarantees they drift. One source removes the drift by construction.
-
-**Rejected:** page only (no attachable PDF), PDF link only (nothing indexable, poor on
-mobile), skipping the CV (it is typically the most-clicked link on a PhD student page).
-
-**Superseded:** the original plan was to host the existing hand-designed
-`CV_ChuaHanChong.pdf` separately. Discovering the RenderCV pipeline made that pure
-duplication, so the generated PDF is now the only one.
+`_data/cv.yml` produces both `/cv/` and the PDF, via
+`.github/workflows/render-cv.yml`. Never hand-edit the PDF; CI commits a regenerated one
+back to `main`, so pull after any `cv.yml` push.
 
 ---
 
 ## 7. Positioning: researcher-first, industry as credibility
 
-**Chosen:** lead with "PhD student, CCDS NTU, working on spatial intelligence, embodied
-AI, real2sim2real"; nine years of industry follows as the reason those questions are
-interesting.
+Lead with the PhD and the research area; nine years of industry follows as the reason
+those questions are interesting, not as a separate career.
 
-**Why:** the audience for the next four years is academic. Nine years of production AI
-is rare enough among year-1 students to be an asset, but only if framed as the origin of
-the research questions rather than as a separate career.
-
-**Rejected:** bridge/dual identity ("bridges research and production" is the most-written
-sentence in AI and reads as unfocused before there are papers to anchor it), industry-first,
-academic blank slate (discards the differentiator).
-
-**Consequence:** the existing CV was written for industry — "Accomplished AI enthusiast",
-"vibe coding", a percentage on every bullet. The site rewords toward research framing while
-keeping the substance and the numbers.
+The source CV was written for industry ("Accomplished AI enthusiast", a percentage on
+every bullet). The site keeps the substance and the numbers, reworded.
 
 ---
 
-## 8. Research framing: spatial intelligence, embodied AI, real2sim2real
+## 8. Research framing: embodied AI with spatial intelligence
 
-**Chosen:** those three, stated as the research area, with no named thesis topic.
+Stated as a research area, not a thesis topic - that ages better through year-1 scope
+changes. Delivered through real-to-sim-to-real transfer and continual learning.
 
-**Why:** stated by the decider. It also coheres with prior work — DINOv2, SAM2, SigLIP2,
-self-supervised representation learning — so it reads as a trajectory rather than a pivot.
-Naming interests rather than a thesis topic ages better through year-1 scope changes.
+The order matters and was chosen deliberately: spatial intelligence is the *means*,
+embodied AI the *end*. Not "embodied AI and spatial intelligence".
 
 ---
 
 ## 9. Visual identity: deep teal, light default, dark toggle
 
-**Chosen:** `#0f766e` as the single accent, light theme by default, dark mode available.
-
-**Why:** decided on the decider's behalf (no stated preference). It dates slowly, which
-matters for a page touched twice a year; it reads serious to academic readers; and embodied
-AI work is visually rich, so figures and video should carry the colour rather than site chrome.
-
-**Rejected:** stock al-folio purple (recognisable at a glance as un-customised), dark
-default (worse for long CV text and printing), NTU brand colours (reads as a department
-page, and stops being yours at graduation).
-
-**Implementation:** al_folio_core maps `$purple-color` onto `--global-theme-color` and
-`--global-hover-color` in both themes, and exposes no other hook, so the accent is set by
-configuring that one variable — see decision 13.
+`#0f766e`. Dates slowly, reads serious, and leaves the colour budget to figures and
+video rather than site chrome. Not NTU brand colours - those read as a department page
+and stop being yours at graduation.
 
 ---
 
-## 10. Links: three live, four scaffolded
+## 10. Links: four live, three scaffolded
 
-**Chosen:** email, GitHub, LinkedIn live. ORCID, Google Scholar, X, Hugging Face present
-in `_data/socials.yml` but commented out.
+Live: email, GitHub, LinkedIn, X. Commented out in `_data/socials.yml`: ORCID, Google
+Scholar, Hugging Face - an icon linking to an empty profile is worse than no icon.
 
-**Why:** an icon linking to an empty profile is worse than no icon. Commented placeholders
-mean turning one on is uncommenting a line.
-
-**Note:** jekyll-socials has no Hugging Face key; it needs `custom_social`. ORCID is worth
-registering now even at zero papers — it is free, permanent, and starts accumulating from
-the first submission.
+ORCID is worth registering at zero papers: free, permanent, accumulates from the first
+submission. Hugging Face has no jekyll-socials key and needs `custom_social`.
 
 ---
 
-## 11. Email: NTU address only
+## 11. Email: NTU address only, on this site
 
-**Chosen:** `CHUA1163@e.ntu.edu.sg` on the social icon. No personal address anywhere.
+`CHUA1163@e.ntu.edu.sg`. An institutional address signals a real researcher at a real
+lab and fares better in academic spam filters. No personal address anywhere on the site.
 
-**Why:** an institutional address signals a real researcher at a real lab and fares better
-in academic spam filters.
+Scope: **this site only.** The GitHub profile keeps `chuahanchong93@gmail.com` as its
+public email, deliberately. Do not "fix" it to match.
 
-**Superseded 2026-08-14:** originally the personal Gmail was listed alongside it as the
-durable fallback for after graduation. Removed at the decider's request. The graduation
-problem is now unsolved - the fix is a custom domain with a forwarding alias (decision 2,
-deferred), which is the better answer anyway.
+The address dies at graduation. The fix is a custom domain with a forwarding alias
+(decision 2), deferred.
 
 ---
 
 ## 12. Publications and Projects ship empty
 
-**Chosen:** no seeded content in either. `papers.bib` holds a commented template only.
-
-**Why:** the decider's call. The MSc dissertation and the IR↔RGB repositories were available
-and were declined.
-
-**Known cost:** the jekyll-scholar pipeline is therefore unexercised. The first real paper is
-the first time it runs — which is the worst day to debug it. The commented template in
-`papers.bib` is there to shorten that.
+No seeded content; `papers.bib` holds a commented template only. Cost: the
+jekyll-scholar pipeline is unexercised, so the first real paper is the first time it
+runs. The template is there to shorten that day.
 
 ---
 
 ## 13. Accent set by overriding the gem's `main.scss`
 
-**Chosen:** a local `assets/css/main.scss` copied from al_folio_core, adding
-`$purple-color: #0f766e` to the existing `@use "variables" with (...)` call.
+`assets/css/main.scss` is a local copy of al_folio_core's, adding `$purple-color: #0f766e`
+to the existing `@use "variables" with (...)` call - the only configuration point the gem
+exposes.
 
-**Why:** the variable is declared `!default` in a gem-owned file, and that `with()` call is
-the only configuration point. Overriding `_sass/_variables.scss` or `_sass/_themes.scss`
-locally would shadow the gem file entirely and require maintaining a full copy.
-
-**Known cost:** the `@use` list is now frozen against the gem. A future al-folio release that
-adds or renames a partial will silently drop those styles until this file is re-synced. Flagged
-in the file, in `README.md`, and here.
+**Upgrade liability.** The `@use` list is now frozen against the gem. A release that adds
+or renames a partial silently drops those styles until this file is re-synced against
+<https://github.com/al-org-dev/al-folio-core/blob/main/assets/css/main.scss>.
 
 ---
 
 ## 14. RenderCV design lives in `_data/cv.yml`, not `design.yaml`
 
-**Chosen:** the `design:` block sits at the top of `_data/cv.yml`.
-`assets/rendercv/design.yaml` is kept, but carries a warning that it is inert.
-
-**Why:** RenderCV applies a design overlay only when invoked with `--design`. al-folio's
-`render-cv.yml` passes only `--settings`, and `settings.render_command.design` is not wired
-into the overlay merge. Verified empirically: a bogus key in `design.yaml` produced neither an
-error nor any change in output, while the same design block inside `cv.yml` took effect
-immediately.
-
-**Rejected:** patching `render-cv.yml` to pass `--design` (works, but edits an upstream file
-and adds upgrade friction for no gain).
+`assets/rendercv/design.yaml` is **inert**. RenderCV applies a design overlay only with
+`--design`, which al-folio's workflow never passes. Verified: a bogus key there produced
+neither an error nor any change in output.
 
 ---
 
 ## 15. RenderCV pinned to the 2.x line
 
-**Chosen:** `rendercv[full]>=2.8,<3` in `requirements.txt`.
-
-**Why:** al-folio ships it unpinned, and the result is that upstream's own demo `_data/cv.yml`
-**fails to render** against current RenderCV — 2.x removed the top-level `cv.label`, `cv.image`,
-`cv.summary`, and `cv.address` keys the demo still uses. `_data/cv.yml` here is written against
-2.x; the pin stops a 3.0 release from breaking the CV silently.
+`rendercv[full]>=2.8,<3`. al-folio ships it unpinned, and upstream's own demo `cv.yml`
+fails to render against current RenderCV - 2.x removed the top-level `cv.label`,
+`cv.image`, `cv.summary`, and `cv.address` keys the demo still uses. Do not add them back.
 
 ---
 
 ## 16. Upstream contributor tooling removed
 
-**Chosen:** deleted `CLAUDE.md`, `AGENTS.md`, `.agents/`, `.claude/`, `.codex/`, `.gemini/`,
-`.all-contributorsrc`, `readme_preview/`, `lighthouse_results/`, `test/`, the issue and PR
-templates, and every workflow except `deploy.yml`, `render-cv.yml`, and `upgrade-check.yml`.
+Deleted the agent instruction files, issue and PR templates, and every workflow except
+`deploy.yml`, `render-cv.yml`, and `upgrade-check.yml`. Those files govern contributing
+*to al-folio*, and the CI they carry guards a template project, not a homepage.
 
-**Why:** those files instruct coding agents on how to contribute *to al-folio*, and would
-otherwise govern work in this repository. The remaining CI (prettier, axe, lychee, CodeQL,
-visual regression) exists to guard a template project and would mostly email failure notices
-about a personal homepage.
-
-**Kept deliberately:** `upgrade-check.yml`, because it reports when a new al-folio release lands
-and that is the one piece of upstream CI that saves work here.
-
-**Also kept:** the `giscus:` block in `_config.yml` despite comments being unused —
-`deploy.yml` runs a `yaml-update-action` against `giscus.repo` and fails if the key is absent.
+`upgrade-check.yml` stays - it reports new al-folio releases. The unused `giscus:` block
+in `_config.yml` stays too: `deploy.yml` runs `yaml-update-action` against `giscus.repo`
+and fails if the key is absent.
 
 ---
 
-## 17. Known gem limitations, accepted rather than patched
+## 17. CV section order: fixed by a template override
 
-Three al-folio behaviours were found during verification and deliberately left alone.
-Each would cost a template override to fix, and overrides are upgrade liabilities
-(decision 13 already carries one that was unavoidable).
+`al_folio_cv`'s `render.liquid` hard-codes Experience first, then loops the rest in file
+order, so `/cv/` disagreed with the PDF. `_includes/cv/render.liquid` is a local copy
+with that hoist removed, plus Professional Summary rendered as a paragraph instead of a
+bullet. Both now follow `cv.yml` order.
 
-**CV section order on the page cannot be controlled.** `al_folio_cv`'s `render.liquid`
-renders Experience first, hard-coded, then loops the remaining sections in file order.
-So `/cv/` shows Experience before Education while the PDF — which respects `cv.yml`
-order — shows Education first. Renaming the section is *not* a workaround: unknown
-section names fall through to a generic renderer that only handles `bullet` and `label`
-entries, so all nine years of work history would silently vanish from the page.
+Same upgrade liability as decision 13: re-diff against the gem on upgrade.
 
-**`sameAs` in the JSON-LD begins with `null`.** The seed array in `al_folio_core`'s
-`metadata.liquid` contributes an empty element. The JSON still parses and consumers
-ignore the null; fixing it means overriding a 250-line template.
-
-**The news collection needed `output: false`.** With al-folio's default `output: true`,
-each one-line announcement got its own URL and sitemap entry — two thin pages on a
-four-page site. They render inline on the about page regardless.
+**Do not rename a CV section to reorder it.** Unknown section names fall through to a
+generic renderer handling only `bullet` and `label` entries, so the entries vanish from
+the page while still appearing in the PDF. Valid names and their fields are documented at
+the top of `_data/cv.yml`.
 
 ---
 
 ## 18. `site.description` must stay a single-line scalar
 
-**Chosen:** `description:` in `_config.yml` is a quoted single-line string, not a `>`
-folded block.
-
-**Why:** `al_folio_core`'s `metadata.liquid` interpolates it directly into the
-schema.org JSON-LD without `jsonify`. A folded block appends a trailing newline, which
-becomes a literal control character inside a JSON string and makes the entire
-structured-data block unparseable. Caught by parsing the built `_site/index.html`;
-al-folio ships the folded form by default, so this is an upstream trap, and it defeats
-the whole point of a findability page.
+`al_folio_core`'s `metadata.liquid` interpolates it into the schema.org JSON-LD without
+`jsonify`. A `>` folded block appends a newline, which becomes a literal control
+character inside a JSON string and makes the whole structured-data block unparseable.
+al-folio ships the folded form by default - an upstream trap that defeats the point of a
+findability page.
 
 ---
 
 ## 19. Name renders as "Chua Han Chong" everywhere
 
-**Chosen:** `first_name: Chua`, `middle_name: Han`, `last_name: Chong`.
+`first_name: Chua`, `middle_name: Han`, `last_name: Chong`. al-folio joins the three as
+"first middle last"; the semantically correct split made the footer and metadata read
+"Han Chong Chua" against a page heading of "Chua Han Chong". Every handle the decider
+controls uses Chua-first.
 
-**Why:** al-folio joins the three as "first middle last" for the footer, the Open Graph
-and schema.org author name, and the blog citation block. The semantically correct split
-(given name "Han Chong", surname "Chua") made those read "Han Chong Chua" while the page
-heading read "Chua Han Chong" — two different names on one page, which is bad for both
-readers and search. Every handle the decider controls (CV header, GitHub, LinkedIn) uses
-Chua-first.
-
-**Known cost:** the surname really is Chua, so `citation.liquid` will emit
-"Chong, Chua Han" on blog posts. The blog is unpublished. If publishing under
-"Han Chong Chua", swap the keys back — noted inline in `_config.yml`.
+Cost: `citation.liquid` will emit "Chong, Chua Han" on blog posts. The blog is
+unpublished; if publishing under "Han Chong Chua", swap the keys back.
 
 ---
 
-## 20. Build locally, decider pushes
+## 20. Local edits, decider pushes
 
-**Chosen:** the site is built in the working tree; creating the GitHub repository and pushing
-is left to the decider.
+Every change is built and reviewed in the working tree first. Publishing puts a real name
+and photo on a Google-indexable page, so each push is approved explicitly - not once,
+and not as a side effect of building.
 
-**Why:** publishing puts a real name and photo on a Google-indexable page. That is the decider's
-call to make after reviewing the result, not a side effect of building it.
+---
+
+## 21. Accepted, not patched
+
+- **`sameAs` in the JSON-LD begins with `null`** - seeded by `al_folio_core`'s
+  `metadata.liquid`. Parses fine, consumers ignore it, and fixing it means overriding a
+  250-line template.
+- **Profile photo is 400x514**, soft on retina.
+- **Coursera shows a different account name** than the certificates' owner, so anyone
+  verifying a credential sees a mismatch. Fixable in Coursera settings, not here.
