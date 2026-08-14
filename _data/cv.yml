@@ -46,7 +46,7 @@ design:
       # and hyphenates full degree names down the page ("Doc-tor of Phi-loso-phy").
       # Drop that column and fold the degree into the main line instead.
       degree_column: null
-      main_column: "**INSTITUTION**, DEGREE_WITH_AREA\nSUMMARY\nHIGHLIGHTS"
+      main_column: "**DEGREE**\nINSTITUTION\nSUMMARY\nHIGHLIGHTS"
 
 locale:
   language: english # required discriminator; the locale block is a tagged union
@@ -73,8 +73,11 @@ cv:
     Education:
       - institution: Nanyang Technological University
         location: Singapore
-        area: Computing and Data Science
-        degree: Doctor of Philosophy
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Doctor of Philosophy in Computing and Data Science
         start_date: 2026-08
         highlights:
           - MMLab@NTU, affiliated with S-Lab. Advised by Professor Chen Change Loy.
@@ -82,8 +85,11 @@ cv:
 
       - institution: Nanyang Technological University
         location: Singapore
-        area: Artificial Intelligence
-        degree: Master of Science
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Master of Science in Artificial Intelligence
         start_date: 2023-08
         end_date: 2026-06
         highlights:
@@ -99,8 +105,11 @@ cv:
 
       - institution: Universiti Putra Malaysia
         location: Kuala Lumpur, Malaysia
-        area: Mechanical Engineering
-        degree: Bachelor of Engineering
+        # `area` is required by RenderCV but left empty: the field is folded into
+        # `degree` so the website renders two lines (degree, institution) instead of
+        # three. al-folio skips an empty area.
+        area: ""
+        degree: Bachelor of Engineering in Mechanical Engineering
         start_date: 2013-09
         end_date: 2017-07
         highlights:
