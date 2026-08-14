@@ -40,6 +40,13 @@ design:
     size: a4
     show_footer: false
     show_top_note: false
+  templates:
+    education_entry:
+      # The stock layout puts `degree` in a 1cm column, which is sized for "PhD"/"MSc"
+      # and hyphenates full degree names down the page ("Doc-tor of Phi-loso-phy").
+      # Drop that column and fold the degree into the main line instead.
+      degree_column: null
+      main_column: "**INSTITUTION**, DEGREE_WITH_AREA\nSUMMARY\nHIGHLIGHTS"
 
 locale:
   language: english # required discriminator; the locale block is a tagged union
@@ -66,9 +73,8 @@ cv:
     Education:
       - institution: Nanyang Technological University
         location: Singapore
-        url: https://www.ntu.edu.sg/computing
         area: Computing and Data Science
-        degree: PhD
+        degree: Doctor of Philosophy
         start_date: 2026-08
         highlights:
           - MMLab@NTU, affiliated with S-Lab. Advised by Professor Chen Change Loy.
@@ -76,21 +82,25 @@ cv:
 
       - institution: Nanyang Technological University
         location: Singapore
-        url: https://www.ntu.edu.sg/computing
         area: Artificial Intelligence
-        degree: MSc
+        degree: Master of Science
         start_date: 2023-08
         end_date: 2026-06
         highlights:
-          - "CGPA: 4.30/5.00. Conferred 30 June 2026."
-          - "Relevant coursework: 3D Deep Learning; Large Language Models; Generative AI
-            for Visual Synthesis; Deep Learning & Applications; AI Master Project (A+)."
+          - "CGPA: 4.30/5.00."
+          # AI6123 Time Series Analysis omitted: the transcript grades it W (withdrawn).
+          # Kept in `highlights` rather than the template's `courses` field, which
+          # al-folio renders but RenderCV ignores - it would vanish from the PDF.
+          - "Coursework: AI6101 Introduction to AI & AI Ethics; AI6102 Machine Learning
+            Methodologies & Applications; AI6103 Deep Learning & Applications; AI6104
+            Mathematics for Artificial Intelligence; AI6128 Urban Computing; AI6129 AI
+            Master Project; AI6130 Large Language Models; AI6131 3D Deep Learning;
+            AI6132 Generative AI for Visual Synthesis."
 
       - institution: Universiti Putra Malaysia
         location: Kuala Lumpur, Malaysia
-        url: https://upm.edu.my/
         area: Mechanical Engineering
-        degree: BEng
+        degree: Bachelor of Engineering
         start_date: 2013-09
         end_date: 2017-07
         highlights:
@@ -212,17 +222,6 @@ cv:
             Tsai-Hill failure criterion to maximise energy storage while minimising mass.
           - Validated top designs with finite element analysis in ANSYS, improving usable
             energy by 23.5% and reducing rotor mass by 41.5% against the NASA G3 baseline.
-
-    Awards:
-      # `title` makes RenderCV infer a PublicationEntry, which requires `authors` -
-      # hence the awarding body repeated there. The website's awards template ignores
-      # `authors` and reads `awarder`, so both renderers need it spelled out.
-      - title: NTU Research Scholarship
-        authors:
-          - Nanyang Technological University, Graduate College
-        date: 2026-04
-        awarder: Nanyang Technological University, Graduate College
-        url: https://www.ntu.edu.sg/admissions/graduate/financialmatters/scholarships/rss
 
     Languages:
       - name: Chinese
