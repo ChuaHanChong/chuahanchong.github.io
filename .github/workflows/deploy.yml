@@ -106,3 +106,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+          # Without these the action authors gh-pages commits with the actor's
+          # account email, publishing a personal address in the branch history on
+          # every single deploy. Pinned to the GitHub noreply address so it cannot
+          # leak regardless of account email-privacy settings.
+          git-config-name: ChuaHanChong
+          git-config-email: ChuaHanChong@users.noreply.github.com
