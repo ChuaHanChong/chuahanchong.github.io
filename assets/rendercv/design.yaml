@@ -1,0 +1,17 @@
+# WARNING: this file is INERT with al-folio's stock render-cv.yml workflow.
+#
+# RenderCV only reads it when invoked as `rendercv render ... --design <file>`,
+# and the workflow passes only `--settings`. Editing this file changes nothing.
+# settings.yaml still has to point at a file that exists, which is why it is kept.
+#
+# The design that actually ships is the top-level `design:` block in _data/cv.yml.
+# Verified against RenderCV v2.8: adding a bogus key here produces no error and
+# no change in output.
+#
+# for more options, see https://docs.rendercv.com/user_guide/yaml_input_structure/design/
+design:
+  theme: classic
+  page:
+    size: a4
+    show_footer: false
+    show_top_note: false

@@ -1,0 +1,9 @@
+nbconvert
+pyyaml
+# Pinned to the 2.x line. al-folio ships this unpinned, which is how the upstream
+# demo _data/cv.yml ended up incompatible with the installed RenderCV: 2.x removed
+# the top-level cv.label / cv.image / cv.summary / cv.address keys that the demo
+# file still uses, so the render-cv workflow fails on a stock checkout.
+# _data/cv.yml here is written against 2.x. Verified with 2.8.
+rendercv[full]>=2.8,<3
+scholarly

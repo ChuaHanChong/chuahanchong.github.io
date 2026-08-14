@@ -1,0 +1,11 @@
+# Feeds _pages/repositories.md, which is `published: false` until this list is
+# curated. Add only repos worth showing - the page renders live GitHub stat cards.
+github_users:
+  - ChuaHanChong
+
+repo_description_lines_max: 2
+
+github_repos:
+  # - ChuaHanChong/IR2RGB
+  # - ChuaHanChong/RGB2IR
+  # - ChuaHanChong/Fine-Grained-Recognition-Using-Pretrained-Self-Supervised-Models

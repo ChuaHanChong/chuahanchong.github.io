@@ -1,0 +1,30 @@
+# Social links shown on the about page, in the order defined here.
+# Full list of supported keys: https://github.com/george-gca/jekyll-socials
+#
+# Anything commented out below is intentional: an icon that links to an empty
+# profile is worse than no icon. Uncomment a line once the profile actually
+# has something on it.
+
+cv_pdf: /assets/rendercv/rendercv_output/Chua_Han_Chong_CV.pdf # generated from _data/cv.yml by .github/workflows/render-cv.yml
+email: CHUA1163@e.ntu.edu.sg
+github_username: ChuaHanChong
+linkedin_username: chuahanchong
+
+# TODO: register at https://orcid.org (free, ~2 min) and paste the iD here, e.g. 0000-0002-1825-0097
+# orcid_id:
+
+# TODO: uncomment once a Google Scholar profile exists (it is created automatically
+# once your first paper is indexed). The value is the `user=` parameter of the profile URL.
+# scholar_userid:
+
+# TODO: uncomment if you start posting on X.
+# x_username:
+
+# TODO: uncomment once you publish a model or dataset on Hugging Face.
+# jekyll-socials has no built-in huggingface key, so it goes through custom_social.
+# custom_social:
+#   logo: https://huggingface.co/favicon.ico
+#   title: Hugging Face
+#   url: https://huggingface.co/<your-username>
+
+# rss_icon: true # uncomment when the blog is published

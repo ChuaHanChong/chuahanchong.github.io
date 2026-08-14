@@ -1,0 +1,7 @@
+# Co-author metadata for jekyll-scholar. Keys MUST be the lower-cased last name
+# with no accents; matching entries in _bibliography/papers.bib get linked automatically.
+# Left empty until there are real co-authors to link.
+#
+# "smith":
+#   - firstname: ["Jane", "J.", "J. A."]
+#     url: https://example.com/

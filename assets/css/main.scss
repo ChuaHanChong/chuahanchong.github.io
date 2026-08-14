@@ -1,0 +1,48 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+// LOCAL OVERRIDE of al_folio_core's assets/css/main.scss.
+//
+// Why it exists: the gem hard-codes the accent as $purple-color (#b509ac) and
+// exposes no other hook - _sass/_variables.scss declares it `!default`, so the
+// only place to change it is the `@use "variables" with (...)` call below.
+//
+// COST OF THIS OVERRIDE: the @use list is now frozen against the gem. If a future
+// al-folio release adds or renames a partial, this file must be re-synced from
+// https://github.com/al-org-dev/al-folio-core/blob/main/assets/css/main.scss
+// or those styles will silently go missing. Diff it whenever you take an upgrade.
+// Last synced against: al-folio v1.2 / al_folio_core main, Aug 2026.
+@charset "utf-8";
+
+/* Built-in Sass modules you’ll likely use across partials */
+@use "sass:math";
+@use "sass:string";
+
+/* Configure your design tokens BEFORE loading any of your partials.
+   Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }},
+  // Accent colour. The gem maps $purple-color onto --global-theme-color and
+  // --global-hover-color in both light and dark themes, so this single value is
+  // the whole accent. Keep it in sync with `design.colors` in _data/cv.yml.
+  $purple-color: #0f766e
+);
+
+/* Your project partials — convert these files to `@use "variables";`
+   (or `@use "variables" as *;`) inside each file and qualify variables if needed. */
+@use "themes";
+@use "layout";
+
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
+
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
