@@ -20,24 +20,8 @@ Design decisions and the reasoning behind them: [`docs/decisions.md`](docs/decis
 
 ## Local preview
 
-Either path works. Preview is **only** for your machine — the live site is built by GitHub Actions, so nothing here needs to be installed or running for the site to be up.
-
-### Native (what this repo is set up for)
-
-Gems are already installed under `vendor/bundle`. macOS system Ruby is far too old, so use the Homebrew one:
-
-```bash
-brew install ruby imagemagick          # once
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-bundle install                         # once
-bundle exec jekyll serve
-```
-
-Then open <http://localhost:4000>.
-
-### Docker (upstream's recommended path)
-
-al-folio marks the native setup "legacy, no longer supported" and documents Docker instead:
+Docker, which is what upstream documents - al-folio marks the native Ruby setup "legacy,
+no longer supported". Start Docker Desktop, then:
 
 ```bash
 docker compose pull
@@ -46,11 +30,8 @@ docker compose up
 
 Then open <http://localhost:8080>.
 
-Docker Desktop is **not currently installed here**. Installing it needs a terminal that can prompt for `sudo` (the cask symlinks helpers into `/usr/local/bin`), so run it yourself:
-
-```bash
-brew install --cask docker
-```
+Preview is **only** for your machine. The live site is built by GitHub Actions, so nothing
+here needs to be installed or running for the site to be up.
 
 ## The CV is one source, two outputs
 
@@ -67,17 +48,14 @@ Two traps worth knowing, both verified against RenderCV v2.8:
 
 ## Known quirks (verified, deliberately not patched)
 
-- `/cv/` renders **Experience before Education**; the PDF renders Education first. The order is hard-coded in the `al_folio_cv` gem and cannot be configured. Renaming the section drops the entries entirely.
+- **Do not rename a CV section to reorder it.** Unknown section names fall through to a generic renderer that handles only `bullet` and `label` entries, so the entries vanish from the page while still appearing in the PDF. Order is set by `_data/cv.yml`, via the `_includes/cv/render.liquid` override.
 - `_config.yml`'s `description:` **must stay a single-line scalar**. A `>` folded block adds a trailing newline that lands inside the schema.org JSON-LD and makes it unparseable.
 - The `sameAs` array in the JSON-LD starts with a `null`, contributed by the gem. Harmless; consumers ignore it.
 - `_config.yml` splits the name as Chua / Han / Chong so the footer and metadata match the heading. The surname is really Chua, so the blog's "cite this" block would read "Chong, Chua Han" — only relevant once the blog is published.
 
 ## Open TODOs
 
-- ORCID iD, Google Scholar ID, X, Hugging Face — `_data/socials.yml`
-- MSc completion month — `_data/cv.yml`, currently `2026-01`, confirm against transcript
-- Certificate dates — `_data/cv.yml`, omitted rather than guessed
-- Higher-resolution profile photo — `assets/img/prof_pic.jpg` is 400×514, soft on retina displays
+- ORCID iD, Google Scholar ID, Hugging Face - `_data/socials.yml`
 
 ## Upgrading al-folio
 

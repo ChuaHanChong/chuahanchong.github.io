@@ -32,20 +32,23 @@ Markdown, and upgrades are a gem bump rather than a merge.
 
 ---
 
-## 4. Local preview: Homebrew Ruby
+## 4. Local preview: Docker
 
 ```bash
-brew install ruby imagemagick
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-bundle install && bundle exec jekyll build
+docker compose up
 ```
 
-Docker was the original choice - upstream marks native Ruby "legacy, no longer
-supported" - but `brew install --cask docker` needs an interactive `sudo` prompt and
-failed, so **Docker is not installed**. Installable any time from a real terminal.
+Serves <http://localhost:8080> from the `amirpourmand/al-folio` image, with the repo
+bind-mounted and auto-regeneration on. Upstream marks the native Ruby setup "legacy, no
+longer supported", so this is the documented path.
 
-Ruby is 4.0.6 locally against 3.3.5 in CI, so a green local build is strong evidence,
-not proof. Preview is a local convenience only; the live site is built by GitHub Actions.
+The native path ran the build here through 2026-08-14, and its `vendor/bundle` (180M)
+and `.bundle/config` were deleted on 2026-08-15 once Docker was verified to serve `/`
+and `/cv/` without them. Homebrew `ruby` and `imagemagick` are still installed and are
+no longer needed by this repo.
+
+Preview is a local convenience only; the live site is built by GitHub Actions and the
+laptop can be off.
 
 ---
 
